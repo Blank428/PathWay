@@ -116,7 +116,10 @@ Details:
    - Cross-page view transitions.
    - Koah's verdict: better, but **"still a long ways off"**.
 
-5. **v5 "calm studio"** (in review, Sep 26): Koah chose the direction from references instead of naming sites. Polish and warmth from Neko Health and Oura, teaching style from Ciechanowski's explainers, restraint from Apple product pages, trust from the NHS, library structure from NIH 3D. Unique to Pathway: the interface stays neutral so filament colours always mean anatomy.
+5. **v5 "calm studio"** (Sep 26, **rejected** as "basic AI slop"): the goal was polish and warmth from Neko Health and Oura, teaching style from Ciechanowski's explainers, restraint from Apple product pages, trust from the NHS and library structure from NIH 3D. What actually got built was v4 reskinned: the same rounded white cards, pill buttons and soft shadows, with warmer colours and a new font. None of the reference sites look like that. Koah called out the two rounded image cards for the front doors in particular as generic. It was also built as a full slice without showing him any direction first.
+   - Lesson: the references were never actually looked at (the cloud container blocked them), and the layout fell back on stock patterns. Don't reskin v4. Don't use rounded card grids for the doors.
+   - Still undecided: whether the live 3D hero and the colour legend (below) stay. Ask Koah.
+   - Below is what v5 contained. The code is on branch `claude/wizardly-dijkstra-oto0es`, not on `main`.
    - Warm bone neutrals, Instrument Sans headings (Geist and Hanken Grotesk on trial via `?font=geist` / `?font=hanken`), Atkinson Hyperlegible Next body. All fonts self-hosted through `@fontsource-variable`.
    - Home: live 3D model is the hero (slow sway, drag to turn, no scroll zoom). "Every colour means one thing" legend lights up those parts and ghosts the rest.
    - Soft studio lighting (drei `Environment` lightformers plus a contact shadow) so renders read as a photographed object, not CAD.
@@ -125,6 +128,10 @@ Details:
    - Scope: home and guide first. The other 7 pages only inherit the tokens until Koah signs off on the look.
 
 **What's still missing, in Koah's words:** smooth, clean, professional, and "everything should flow exactly how your brain thinks it should."
+
+**Process rule after v5:** no more building the real site on a guessed direction. First make 3 home page mockups that are really different from each other (for example an exhibition or museum object page, an immersive full-screen model, and a reading-first explainer). Look at the actual reference sites while making them. Koah picks one, or picks parts to take from each. Then build.
+
+**Preview rule:** only show Koah something that runs exactly as tested. Locally, that's the dev server in his own browser. A Claude artifact preview of the multi-page build broke navigation (the guide wouldn't open and Back didn't work), so don't use one for this site.
 
 Direction is now set (item 5). Roll it out to the other pages only after Koah approves the home and guide slice.
 

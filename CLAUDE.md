@@ -6,8 +6,8 @@ Read this first. It sums up a long design session so you don't repeat work that 
 
 Pathway is a hub for 3D printed teaching models of Interventional Radiology (IR) procedures at Victoria General Hospital (Island Health), plus the patient guides that go with them. The idea is that a doctor hands a patient the printed model in clinic, and the patient goes over the same model at home on this site.
 
-- **Koah Barstead** owns the front end and the printing. You're working with him. Treat him as the design lead.
-- **Jodh Gill** is project lead and owns the hospital relationship. He built the first site and signs off on the design.
+- **Koah Barstead** owns the front end and the printing. You're working with him. He is the design lead and has final say on design. No one else signs off.
+- **Jodh Gill** is project lead and owns the hospital relationship. He built the first site.
 - **Dr. Kotha** is Medical Lead, IR, and the clinical sponsor. Always write "Dr. Kotha". No other form of the name.
 - **Lia McCulloch** is credited on the team list. Leave her credit as is.
 
@@ -150,7 +150,7 @@ Screenshot the `.guide-stage` element, crop it, and save it as WebP to `public/s
 
 ## Open items
 
-- [ ] Design direction from Koah's references, then Jodh's sign-off.
+- [ ] Design direction from Koah's references (Koah signs off).
 - [ ] Real photos into the 6 slots.
 - [ ] Print discs D and E so print and screen match 5 for 5 (recommended).
 - [ ] Each statistic tied to one of the 6 listed sources, then Dr. Kotha's review with a date shown.

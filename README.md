@@ -28,4 +28,4 @@ Makes `preview/` with relative paths (artifacts serve from a sub-path and don't 
 
 ## Status (2026-09-26)
 - Rebuilt as a hub (Sep 26, 11:30): home with two front doors, patient guides, model library, P-001 project page with photo slots and parts list, maker-lab design, printed colours only. axe-core: 0 WCAG 2.2 AA issues on all 9 pages, light and dark.
-- Waiting on: Jodh's design sign-off, the open decisions in the roadmap doc, Dr. Kotha's clinical review.
+- Waiting on: the new design direction, the open decisions in the roadmap doc, Dr. Kotha's clinical review.

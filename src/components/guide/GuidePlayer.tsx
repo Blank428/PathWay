@@ -274,8 +274,8 @@ export default function GuidePlayer({ title, chapters, catheterPath, root, visit
         </div>
 
         <div className="panel-body" ref={panelRef}>
-          <h1 id="chapter-title" tabIndex={-1}>{ch.title}</h1>
-          <div className="chapter-text">{ch.body.map((b, n) => <p key={n}>{b}</p>)}</div>
+          <h1 id="chapter-title" key={"h-" + ch.id} tabIndex={-1}>{ch.title}</h1>
+          <div className="chapter-text" key={"t-" + ch.id}>{ch.body.map((b, n) => <p key={n}>{b}</p>)}</div>
 
           {ch.id === 'take-it-apart' && (
             <label className="explode">
@@ -333,6 +333,7 @@ export default function GuidePlayer({ title, chapters, catheterPath, root, visit
           )}
         </div>
 
+        {!isLast && <p className="up-next"><span>Up next</span> {chapters[i + 1].title}</p>}
         <div className="panel-nav">
           <button type="button" className="btn btn-quiet" onClick={() => { go(-1); setPlaying(false); }} disabled={i === 0}>Back</button>
           <button type="button" className="btn btn-quiet play" aria-pressed={playing} onClick={() => setPlaying((pl) => !pl)} disabled={isLast}>

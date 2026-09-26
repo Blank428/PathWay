@@ -1,95 +1,102 @@
 ---
 import Base from '../layouts/Base.astro';
+import HeroModel from '../components/home/HeroModel.tsx';
 import '../styles/pages.css';
 import site from '../content/site.json';
 import data from '../content/projects.json';
 import ufe from '../content/procedures/ufe.json';
+import model from '../content/procedures/ufe-model.json';
 import { rootFor, PAGES } from '../lib/paths';
 const root = rootFor(Astro.url.pathname);
 const p = data.projects[0];
-const arrow = '<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h10.5M8.5 3.5 13 8l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>';
+const arrow = '<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h10.5M8.5 3.5 13 8l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 ---
 <Base title={site.name}>
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <span class="eyebrow rise"><span class="dot"></span>Interventional Radiology · {site.hospital}</span>
-        <h1 class="rise-2">Hold the procedure in your hands.</h1>
-        <p class="lede rise-3">{site.name} is where we design, print and explain 3D models of interventional radiology procedures. Doctors use the printed model in clinic. Patients go over the same model at home.</p>
-        <div class="actions rise-3">
+  <section class="home-hero" aria-labelledby="hero-h">
+    <div class="wrap home-hero-grid">
+      <div class="home-hero-copy">
+        <p class="kicker rise">{site.unit} at {site.hospital}</p>
+        <h1 id="hero-h" class="rise-2">Hold the procedure in your hands.</h1>
+        <p class="lede rise-3">We design and print 3D models of procedures. Your doctor shows you the model in clinic. At home, you can go over the same model here, one step at a time.</p>
+        <div class="actions rise-4">
           <a class="btn btn-primary" href={root + PAGES.guides}>I'm a patient <Fragment set:html={arrow} /></a>
           <a class="btn btn-quiet" href={root + PAGES.library}>I'm a clinician <Fragment set:html={arrow} /></a>
         </div>
       </div>
-      <figure class="hero-fig studio rise-2">
-        <span class="fig-tag mono">{p.code} · {p.short} teaching model · rev {p.revision}</span>
-        <img src={root + 'stills/home/hero.webp'} alt={`The printed ${p.title.toLowerCase()} model on its display base: a cut-open white uterus, purple fibroids, red arteries and orange risk discs.`} />
-      </figure>
-    </div>
-    <div class="wrap">
-      <dl class="tblock hero-tblock">
-        <div><dt>Project</dt><dd>{p.code}</dd></div>
-        <div><dt>Procedure</dt><dd>{p.short}</dd></div>
-        <div><dt>Printed parts</dt><dd>{p.specs.parts}</dd></div>
-        <div><dt>Footprint</dt><dd>{p.specs.footprint}</dd></div>
-        <div><dt>Print time</dt><dd>{p.specs.printTime}</dd></div>
-        <div><dt>Status</dt><dd>{p.status}, rev {p.revision}</dd></div>
-      </dl>
+      <div class="home-hero-model rise-2">
+        <HeroModel
+          client:load
+          root={root}
+          catheterPath={model.catheterPath as any}
+          poster={root + 'stills/home/hero.webp'}
+          alt={`The printed ${p.title.toLowerCase()} model on its blue display base: a cut-open white uterus with purple fibroids, red arteries, pink ovaries and orange risk discs.`}
+        />
+      </div>
     </div>
   </section>
 
   <div class="wrap">
     <nav class="doors" aria-label="Choose where to start">
       <a class="door" href={root + PAGES.guides}>
-        <span class="label">For patients and families</span>
-        <h2>Find your procedure</h2>
-        <p>Step through your procedure on the same model your doctor shows you, then see recovery, risks and the questions to bring.</p>
-        <ul class="door-list"><li>{ufe.title}, {ufe.chapters.length} chapters</li><li>Recovery, options and questions</li></ul>
-        <span class="door-cta">Browse guides <Fragment set:html={arrow} /></span>
+        <figure class="door-fig studio"><img src={root + 'stills/home/door-guides.webp'} alt="" loading="lazy" /></figure>
+        <div class="door-copy">
+          <p class="door-for">For patients and families</p>
+          <h2>Step through your procedure</h2>
+          <p>Go over the same model your doctor showed you. See what happens, what recovery is like, and what to ask.</p>
+          <span class="door-cta">Browse guides <Fragment set:html={arrow} /></span>
+        </div>
       </a>
       <a class="door" href={root + PAGES.library}>
-        <span class="label">For clinicians and the hospital</span>
-        <h2>The model library</h2>
-        <p>Every model we've designed or have planned, with its parts, print specs, photos and how to use it in a consult.</p>
-        <ul class="door-list"><li>{data.projects.length} model in use, {data.planned.length} planned</li><li>Parts lists and print details</li></ul>
-        <span class="door-cta">Open the library <Fragment set:html={arrow} /></span>
+        <figure class="door-fig studio"><img src={root + 'stills/home/door-library.webp'} alt="" loading="lazy" /></figure>
+        <div class="door-copy">
+          <p class="door-for">For clinicians and the hospital</p>
+          <h2>The model library</h2>
+          <p>Every model we have made or planned, with parts, print details and how to use it in a consult.</p>
+          <span class="door-cta">Open the library <Fragment set:html={arrow} /></span>
+        </div>
       </a>
     </nav>
 
-    <section class="sec" aria-labelledby="lib-h">
+    <section class="made" aria-labelledby="made-h">
+      <div class="made-intro">
+        <h2 id="made-h">One model, on the table and on the screen.</h2>
+        <p>The site shows the exact parts that come off the printer, in the same colours. What you hold in clinic is what you see at home.</p>
+      </div>
+      <dl class="made-list">
+        <div>
+          <dt>Designed with the physician</dt>
+          <dd>Built around what the doctor needs to show: where the problem is, the route in, and where the risks come from.</dd>
+        </div>
+        <div>
+          <dt>Printed to come apart</dt>
+          <dd>{p.specs.parts} parts that peg together with no glue, so the model can be taken apart and put back again and again.</dd>
+        </div>
+        <div>
+          <dt>Explained online, part for part</dt>
+          <dd>The guide uses the same files as the print, and the physician reviews it before patients see it.</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="home-lib" aria-labelledby="lib-h">
       <div class="sec-head">
         <h2 id="lib-h">Library</h2>
-        <p>One printed model per procedure, each with a guide for patients.</p>
+        <a class="sec-link" href={root + PAGES.library}>All {data.projects.length + data.planned.length} projects <Fragment set:html={arrow} /></a>
       </div>
       <ul class="catalogue">
         <li>
           <a class="cat-row" href={root + PAGES.ufeProject}>
             <span class="cat-code">{p.code}</span>
             <span class="cat-title">{p.title}</span>
-            <span class="mono">{p.specs.parts} parts · {p.specs.printTime}</span>
+            <span class="cat-meta">{p.specs.parts} parts · {p.specs.printTime}</span>
             <span class="cat-swatches" aria-label="Filament colours">{p.filaments.map(([n, c]) => <span class="swatch" style={`background:${c}`} title={n}></span>)}</span>
             <span class="status is-live">{p.status}</span>
           </a>
         </li>
         {data.planned.slice(0, 4).map((q) => (
-          <li><div class="cat-row is-planned"><span class="cat-code">{q.code}</span><span class="cat-title">{q.title}</span><span class="mono">{q.region}</span><span></span><span class="status is-planned">Planned</span></div></li>
+          <li><div class="cat-row is-planned"><span class="cat-code">{q.code}</span><span class="cat-title">{q.title}</span><span class="cat-meta">{q.region}</span><span></span><span class="status is-planned">Planned</span></div></li>
         ))}
       </ul>
-      <p style="margin-top:16px"><a href={root + PAGES.library}>See all {data.projects.length + data.planned.length} projects in the library</a></p>
-    </section>
-
-    <section class="sec" aria-labelledby="proc-h">
-      <div class="sec-head">
-        <h2 id="proc-h">How a model gets made</h2>
-        <p>The same three steps for every procedure.</p>
-      </div>
-      <div class="process">
-        <ol>
-          <li><span class="num">01</span><h3>Design</h3><p>Built with the physician around what they need to show: where the problem is, the route in, and where the risks come from.</p><p class="facts-line mono">Parts sized so nothing thin snaps off</p></li>
-          <li><span class="num">02</span><h3>Print</h3><p>Printed in the colours patients see on screen. Parts peg together with no glue, so the model comes apart again and again.</p><p class="facts-line mono">{p.code}: {p.specs.plates} plates · {p.specs.layer} layers · {p.specs.filament}</p></li>
-          <li><span class="num">03</span><h3>Guide</h3><p>The same model goes online as a step-by-step guide, reviewed by the physician before patients see it.</p><p class="facts-line mono">Exported from the print files, part for part</p></li>
-        </ol>
-      </div>
     </section>
   </div>
 </Base>

@@ -16,7 +16,7 @@ const root = rootFor(Astro.url.pathname);
           <li id={`text-${c.id}`}>
             <span class="mono">{String(n + 1).padStart(2, '0')}</span>
             <div>
-              <h3>{c.title}</h3>
+              <h2 class="t-ch">{c.title}</h2>
               {c.body.map((b) => <p>{b}</p>)}
               {'risks' in c && c.risks && (
                 <ul>{(c.risks as any[]).map((r) => <li><strong>{r.title}.</strong> {r.body}</li>)}</ul>

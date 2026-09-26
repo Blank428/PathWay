@@ -1,5 +1,5 @@
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { OrbitControls, useGLTF } from '@react-three/drei';
+import { ContactShadows, Environment, Lightformer, OrbitControls, useGLTF } from '@react-three/drei';
 import { useEffect, useMemo, useRef } from 'react';
 import * as THREE from 'three';
 import { EXPLODE, GROUPS, RISK_MARKERS, type View, type Vec3 } from '../../content/procedures/ufe-views';
@@ -23,6 +23,10 @@ type Props = {
   onOverlay: OverlaySink;
   onPartTap?: (part: string) => void;
   reducedMotion: boolean;
+  dimTo?: number;           // how far unfocused parts fade (home legend fades harder, base included)
+  sway?: boolean;           // home hero: a slow side-to-side turn while idle
+  enableZoom?: boolean;     // off on scrolling pages so the wheel still scrolls the page
+  onLoaded?: () => void;
 };
 
 const ANATOMY: Record<string, string> = {
@@ -76,7 +80,12 @@ function Model(p: Props & { onReady: (parts: Map<string, PartState>) => void }) 
     return map;
   }, [root]);
 
-  useEffect(() => { p.onReady(parts); }, [parts]);
+  useEffect(() => { p.onReady(parts); p.onLoaded?.(); }, [parts]);
+
+  // the lowest point of the assembled model, for the contact shadow
+  const floor = useMemo(() => { root.updateMatrixWorld(true); return new THREE.Box3().setFromObject(root).min.y; }, [root]);
+  const sway = useRef<THREE.Group>(null!);
+  const swayAmt = useRef(0);
 
   // colours per mode
   useEffect(() => {
@@ -85,10 +94,18 @@ function Model(p: Props & { onReady: (parts: Map<string, PartState>) => void }) 
       const c = new THREE.Color(pal[kindOf(name)]);
       m.color.copy(c);
       m.emissive.copy(c);
-      m.roughness = p.mode === 'printed' ? 0.86 : (kindOf(name) === 'artery' ? 0.38 : 0.55);
+      m.roughness = p.mode === 'printed' ? 0.72 : (kindOf(name) === 'artery' ? 0.38 : 0.55);
+      m.envMapIntensity = 0.55;
       m.needsUpdate = true;
     }));
   }, [p.mode, parts]);
+
+  useFrame(({ clock }, dt) => {
+    if (!sway.current) return;
+    const on = p.sway && !p.reducedMotion;
+    swayAmt.current += ((on ? 1 : 0) - swayAmt.current) * Math.min(1, dt * 0.8);
+    sway.current.rotation.y = Math.sin(clock.elapsedTime * 0.22) * 0.42 * swayAmt.current;
+  });
 
   const explodeNow = useRef(p.explode);
   const afterNow = useRef(p.after ? 1 : 0);
@@ -106,7 +123,7 @@ function Model(p: Props & { onReady: (parts: Map<string, PartState>) => void }) 
       let target = show.has(name) ? (ghost.has(name) ? 0.2 : 1) : 0;
       if (name.startsWith('fibroid')) target *= 1 - afterNow.current;
       if (name.startsWith('after')) target = (show.has(name.replace('after', 'fibroid')) || show.has(name) ? 1 : 0) * afterNow.current;
-      if (focus.size && !focus.has(name) && target > 0.21 && name !== 'base') target = Math.min(target, 0.55);
+      if (focus.size && !focus.has(name) && target > 0.21 && (p.dimTo != null || name !== 'base')) target = Math.min(target, p.dimTo ?? 0.55);
       st.opacity += (target - st.opacity) * k;
       const glowT = focus.has(name) ? 0.38 : hi.has(name) ? 0.14 : 0;
       st.glow += (glowT - st.glow) * k;
@@ -123,12 +140,15 @@ function Model(p: Props & { onReady: (parts: Map<string, PartState>) => void }) 
   });
 
   return (
+    <group ref={sway}>
     <primitive
       object={root}
       onClick={(e: any) => { if (!p.onPartTap) return; e.stopPropagation(); const n = e.object?.userData?.part; if (n) p.onPartTap(n); }}
       onPointerOver={(e: any) => { e.stopPropagation(); document.body.style.cursor = p.onPartTap ? 'pointer' : ''; }}
       onPointerOut={() => { document.body.style.cursor = ''; }}
     />
+    <ContactShadows position={[0, floor - 0.005, 0]} scale={9} blur={2.6} far={2.4} opacity={0.34} resolution={512} color="#2a2114" frames={p.reducedMotion ? 1 : Infinity} />
+    </group>
   );
 }
 
@@ -260,14 +280,21 @@ export default function Stage(p: Props) {
       gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
       aria-hidden="true"
     >
-      <hemisphereLight args={['#ffffff', '#8c8f86', 1.05]} />
-      <directionalLight position={[3.5, 5, 6]} intensity={2.1} />
-      <directionalLight position={[-5, 1.5, 2]} intensity={0.75} color={'#dfe8ff'} />
-      <directionalLight position={[0, 3, -6]} intensity={1.1} color={'#ffe9dc'} />
+      {/* soft studio: a big overhead softbox, two side strips and a warm rim, like a product photo */}
+      <hemisphereLight args={['#fffaf0', '#8a8272', 0.7]} />
+      <directionalLight position={[3.5, 5.5, 6]} intensity={1.7} color={'#fff6ea'} />
+      <directionalLight position={[-5, 1.5, 2]} intensity={0.5} color={'#e6ecff'} />
+      <directionalLight position={[0, 3, -6]} intensity={0.9} color={'#ffe6d2'} />
+      <Environment resolution={128} frames={1}>
+        <Lightformer form="rect" intensity={2.2} position={[0, 6, 2]} rotation-x={Math.PI / 2} scale={[10, 6, 1]} />
+        <Lightformer form="rect" intensity={1.2} position={[-6, 1.5, 3]} rotation-y={Math.PI / 2.4} scale={[3, 8, 1]} color="#f2f5ff" />
+        <Lightformer form="rect" intensity={1.0} position={[6, 1.5, 3]} rotation-y={-Math.PI / 2.4} scale={[3, 8, 1]} color="#fff2e2" />
+        <Lightformer form="ring" intensity={0.6} position={[0, 1, -7]} scale={5} color="#ffe3cc" />
+      </Environment>
       <Model {...p} onReady={(m) => { partsRef.current = m; }} />
       <Catheter path={p.catheterPath} range={p.view.catheter} mode={p.mode} reducedMotion={p.reducedMotion} chapterKey={p.chapterKey} />
       <Particles from={pathEnd} targets={tipTargets} on={!!p.view.particles} reducedMotion={p.reducedMotion} />
-      <OrbitControls makeDefault enableDamping dampingFactor={0.08} enablePan={false} minDistance={1.6} maxDistance={13} rotateSpeed={0.7} />
+      <OrbitControls makeDefault enableDamping dampingFactor={0.08} enablePan={false} enableZoom={p.enableZoom ?? true} minDistance={1.6} maxDistance={13} rotateSpeed={0.7} />
       <CameraRig view={p.view} chapterKey={p.chapterKey} resetKey={p.resetKey} reducedMotion={p.reducedMotion} />
       <Projector anchors={p.anchors} parts={partsRef} onOverlay={p.onOverlay} explode={p.explode} />
     </Canvas>

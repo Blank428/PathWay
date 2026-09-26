@@ -116,9 +116,17 @@ Details:
    - Cross-page view transitions.
    - Koah's verdict: better, but **"still a long ways off"**.
 
+5. **v5 "calm studio"** (in review, Sep 26): Koah chose the direction from references instead of naming sites. Polish and warmth from Neko Health and Oura, teaching style from Ciechanowski's explainers, restraint from Apple product pages, trust from the NHS, library structure from NIH 3D. Unique to Pathway: the interface stays neutral so filament colours always mean anatomy.
+   - Warm bone neutrals, Instrument Sans headings (Geist and Hanken Grotesk on trial via `?font=geist` / `?font=hanken`), Atkinson Hyperlegible Next body. All fonts self-hosted through `@fontsource-variable`.
+   - Home: live 3D model is the hero (slow sway, drag to turn, no scroll zoom). "Every colour means one thing" legend lights up those parts and ghosts the rest.
+   - Soft studio lighting (drei `Environment` lightformers plus a contact shadow) so renders read as a photographed object, not CAD.
+   - Header is clear at the top of a page and frosts on scroll. No numbered cards, no caps labels, no boxed hero.
+   - Guide: same player, lighter type, chapter text settles in on each change, "Up next" line above the nav.
+   - Scope: home and guide first. The other 7 pages only inherit the tokens until Koah signs off on the look.
+
 **What's still missing, in Koah's words:** smooth, clean, professional, and "everything should flow exactly how your brain thinks it should."
 
-Before another visual pass, get concrete references from him: 3 to 5 sites he loves and what he likes about each. Don't guess taste again.
+Direction is now set (item 5). Roll it out to the other pages only after Koah approves the home and guide slice.
 
 ## Structure Koah chose
 
@@ -135,7 +143,7 @@ Posters and hero images come from the live viewer:
 - `ufe.html?still#chapter` hides the overlays.
 - `?view=hero` or `?view=exploded` uses `STILL_VIEWS`.
 
-Screenshot the `.guide-stage` element, crop it, and save it as WebP to `public/stills/`. Re-render after any model or lighting change.
+Render with a transparent background (hide the header and panel, make `.guide-stage` a fixed size, screenshot with `omitBackground`) and save as WebP with alpha to `public/stills/`, so one image works on the light and dark studio backdrops. Guide posters are 1180 x 1000, the home hero is 1400 x 1204 with `?view=home`, door images are 1600 x 900. Re-render after any model or lighting change.
 
 ## Checks before calling anything done
 
@@ -150,7 +158,8 @@ Screenshot the `.guide-stage` element, crop it, and save it as WebP to `public/s
 
 ## Open items
 
-- [ ] Design direction from Koah's references (Koah signs off).
+- [x] Design direction chosen (v5 calm studio).
+- [ ] Koah reviews the home and guide slice, picks a heading font, then roll out to the other 7 pages.
 - [ ] Real photos into the 6 slots.
 - [ ] Print discs D and E so print and screen match 5 for 5 (recommended).
 - [ ] Each statistic tied to one of the 6 listed sources, then Dr. Kotha's review with a date shown.

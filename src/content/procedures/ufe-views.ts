@@ -148,12 +148,21 @@ export const VIEWS: Record<string, View> = {
 
 // Render-only views for the home page and project page stills (?still&view=hero).
 export const STILL_VIEWS: Record<string, View> = {
+  home: {
+    camera: [-2.55, 1.15, 7.6], target: [0.1, 0.22, -0.3],
+    show: ['uterus', 'fibroids', 'adnexa', 'uterineArteries', 'tree', 'ovarianArteries', 'discs', 'base'],
+  },
   hero: {
     camera: [-2.9, 1.5, 5.75], target: [0.05, 0.42, -0.3],
     show: ['uterus', 'fibroids', 'adnexa', 'uterineArteries', 'tree', 'ovarianArteries', 'discs', 'base'],
   },
   exploded: {
     camera: [-3.2, 1.75, 6.4], target: [0.1, 0.45, -0.15],
+    show: ['uterus', 'fibroids', 'adnexa', 'uterineArteries', 'tree', 'ovarianArteries', 'discs', 'base'],
+    explode: 0.6,
+  },
+  'exploded-wide': {
+    camera: [-3.6, 1.6, 7.9], target: [0.15, 0.62, -0.15],
     show: ['uterus', 'fibroids', 'adnexa', 'uterineArteries', 'tree', 'ovarianArteries', 'discs', 'base'],
     explode: 0.6,
   },

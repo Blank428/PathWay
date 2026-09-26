@@ -1,0 +1,82 @@
+{
+  "name": "Pathway",
+  "unit": "Interventional Radiology",
+  "hospital": "Victoria General Hospital",
+  "clinicalLead": "Dr. Kotha, Medical Lead, Interventional Radiology",
+  "team": [
+    {
+      "name": "Jodh Gill",
+      "role": "Project lead. Designed the 3D models and built this site."
+    },
+    {
+      "name": "Dr. Kotha",
+      "role": "Medical Lead, Interventional Radiology. Clinical collaborator."
+    },
+    {
+      "name": "Koah Barstead",
+      "role": "Production lead. 3D printing."
+    },
+    {
+      "name": "Lia McCulloch",
+      "role": "Quality improvement lead. Design and website development."
+    }
+  ],
+  "upcoming": [
+    {
+      "id": "pae",
+      "title": "Prostate artery embolization",
+      "region": "Prostate",
+      "summary": "Eases an enlarged prostate by reducing its blood supply.",
+      "intro": "As men get older the prostate often grows and presses on the tube that carries urine from the bladder, causing a weak stream, going often, or getting up at night. PAE reduces the prostate's blood supply through a catheter, so it softens and shrinks without surgery."
+    },
+    {
+      "id": "vertebroplasty",
+      "title": "Vertebroplasty and kyphoplasty",
+      "region": "Spine",
+      "summary": "Stabilises a painful spinal fracture with bone cement, through a needle.",
+      "intro": "When a bone in the spine collapses, often because of thinning bone, it can cause severe back pain. Medical bone cement is injected through a needle into the broken bone, guided by imaging, to stabilise it. Many people find their pain eases within days."
+    },
+    {
+      "id": "evar",
+      "title": "Endovascular aneurysm repair",
+      "region": "Aorta",
+      "summary": "Repairs a bulge in the body's main artery from the inside.",
+      "intro": "An aneurysm is a weak, ballooned section of the aorta. In EVAR, a fabric-covered tube called a stent graft is guided up from the groin and opened inside the aneurysm, so blood flows through the graft instead of pressing on the weak wall."
+    },
+    {
+      "id": "nephrostomy",
+      "title": "Nephrostomy tube",
+      "region": "Kidney",
+      "summary": "Drains a kidney when the usual path out is blocked.",
+      "intro": "If the tube that carries urine from a kidney to the bladder is blocked, pressure builds up and can damage the kidney. A small tube is placed through the back into the kidney, guided by imaging, so urine can drain while the blockage is treated."
+    },
+    {
+      "id": "picc",
+      "title": "PICC line",
+      "region": "Arm",
+      "summary": "A soft IV line in the arm for treatment lasting weeks.",
+      "intro": "For long courses of antibiotics, chemotherapy or nutrition, a PICC line is a soft tube placed in an arm vein and threaded to a large vein near the heart, so treatment can be given for weeks without repeated needles."
+    },
+    {
+      "id": "tace",
+      "title": "Chemoembolization of the liver",
+      "region": "Liver",
+      "summary": "Delivers cancer treatment straight into a liver tumour's blood supply.",
+      "intro": "A catheter reaches the arteries feeding a liver tumour, delivers chemotherapy directly into them, then blocks them, so the treatment is concentrated where the tumour is."
+    },
+    {
+      "id": "biliary-drain",
+      "title": "Biliary drain",
+      "region": "Liver",
+      "summary": "Drains bile when the duct carrying it is blocked.",
+      "intro": "If a bile duct is blocked, bile backs up and can cause yellow skin, itching and infection. A thin tube is placed through the skin into the duct, guided by imaging, so bile can drain while the cause is treated."
+    },
+    {
+      "id": "varicose-vein",
+      "title": "Varicose vein treatment",
+      "region": "Leg",
+      "summary": "Closes a damaged leg vein from the inside.",
+      "intro": "Varicose veins form when small valves in a leg vein stop working and blood pools. The damaged vein is closed from the inside with heat or medical glue through a thin tube, and blood reroutes through healthy veins."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+import '../../components/guide/guide.css';
+import '../../styles/pages.css';
+import ufe from '../../content/procedures/ufe.json';
+import { rootFor, PAGES } from '../../lib/paths';
+const root = rootFor(Astro.url.pathname);
+---
+<Base title="The UFE guide as text" current="guides" description={ufe.lede}>
+  <header class="page-head grid-bg"><div class="wrap"><span class="crumb"><a href={root + PAGES.guides}>Guides</a> / {ufe.title}</span><h1 id="as-text-title">The guide as text</h1></div></header>
+  <section class="transcript" aria-labelledby="as-text-title">
+    <div class="wrap">
+      <p>The same {ufe.chapters.length} chapters without the model, for reading, screen readers or printing. <a href={root + PAGES.ufe}>Back to the guide with the model</a>.</p>
+      <ol>
+        {ufe.chapters.map((c, n) => (
+          <li id={`text-${c.id}`}>
+            <span class="mono">{String(n + 1).padStart(2, '0')}</span>
+            <div>
+              <h3>{c.title}</h3>
+              {c.body.map((b) => <p>{b}</p>)}
+              {'risks' in c && c.risks && (
+                <ul>{(c.risks as any[]).map((r) => <li><strong>{r.title}.</strong> {r.body}</li>)}</ul>
+              )}
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+</Base>

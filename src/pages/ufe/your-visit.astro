@@ -1,0 +1,90 @@
+---
+import Base from '../../layouts/Base.astro';
+import Quiz from '../../components/visit/Quiz.tsx';
+import Questions from '../../components/visit/Questions.tsx';
+import '../../styles/pages.css';
+import ufe from '../../content/procedures/ufe.json';
+import { rootFor, PAGES } from '../../lib/paths';
+const root = rootFor(Astro.url.pathname);
+const v = ufe.yourVisit;
+const [callLead, ...callRest] = v.callIf.split(' if ');
+---
+<Base title="Your visit" current="guides" description="Recovery, benefits and risks, other options and questions to bring for uterine fibroid embolization.">
+  <header class="page-head grid-bg">
+    <div class="wrap">
+      <span class="crumb"><a href={root + PAGES.guides}>Guides</a> / {ufe.title}</span>
+      <h1>Your visit</h1>
+      <p class="lede">What recovery looks like, what UFE can and can't do, the other options, and the questions worth bringing to your appointment. Haven't seen the model yet? <a href={root + PAGES.ufe}>Start the guide</a>.</p>
+    </div>
+  </header>
+  <div class="wrap">
+    <div class="doc-grid">
+      <nav class="toc" aria-label="On this page">
+        <a href="#recovery">Recovery</a>
+        <a href="#benefits-risks">Benefits and risks</a>
+        <a href="#pregnancy">If you want to become pregnant</a>
+        <a href="#options">Other options</a>
+        <a href="#check">Check your understanding</a>
+        <a href="#questions">Questions to bring</a>
+        <a href="#words">Words used</a>
+        <a href="#sources">Sources</a>
+      </nav>
+      <div class="doc-body">
+        <section id="recovery" aria-labelledby="recovery-h">
+          <h2 id="recovery-h">Recovery</h2>
+          <p class="intro">What most people can expect. Your team will give you your own instructions.</p>
+          <ol class="timeline">
+            {v.recovery.map(([when, what]) => (<li><span class="when">{when}</span><span class="what">{what}</span></li>))}
+          </ol>
+          <p class="callout-risk"><strong>{callLead}</strong> if {callRest.join(' if ')}</p>
+        </section>
+
+        <section id="benefits-risks" aria-labelledby="br-h">
+          <h2 id="br-h">Benefits and risks</h2>
+          <div class="two-col">
+            <div class="ledger good"><h3>What it can give you</h3><ul>{v.benefits.map((b) => <li>{b}</li>)}</ul></div>
+            <div class="ledger bad"><h3>What can go wrong</h3><ul>{v.risks.map((b) => <li>{b}</li>)}</ul></div>
+          </div>
+        </section>
+
+        <section id="pregnancy" aria-labelledby="preg-h">
+          <h2 id="preg-h">If you want to become pregnant</h2>
+          <p class="callout-note">{v.fertility.replace(/^If you may want to become pregnant\.\s*/, '')}</p>
+        </section>
+
+        <section id="options" aria-labelledby="opt-h">
+          <h2 id="opt-h">Other options</h2>
+          <p class="intro">UFE is one of several choices. Doing nothing for now is also a choice.</p>
+          <dl class="options">
+            <div class="is-this"><dt>Uterine fibroid embolization</dt><dd>Blocks the fibroids' blood supply through a small opening at the groin or wrist. The uterus stays.</dd></div>
+            {v.alternatives.map(([t, d]) => (<div><dt>{t}</dt><dd>{d}</dd></div>))}
+          </dl>
+        </section>
+
+        <section id="check" aria-labelledby="check-h" class="no-print">
+          <h2 id="check-h">Check your understanding</h2>
+          <p class="intro">Four quick questions. Pick an answer to see why.</p>
+          <Quiz client:visible items={v.check as any} />
+        </section>
+
+        <section id="questions" aria-labelledby="q-h">
+          <h2 id="q-h">Questions to bring</h2>
+          <p class="intro">Tick the ones that matter to you, then copy them into a note or bring this page.</p>
+          <Questions client:visible items={v.questions as string[]} />
+        </section>
+
+        <section id="words" aria-labelledby="w-h">
+          <h2 id="w-h">Words used</h2>
+          <dl class="glossary">{v.glossary.map(([t, d]) => (<div><dt>{t}</dt><dd>{d}</dd></div>))}</dl>
+        </section>
+
+        <section id="sources" aria-labelledby="s-h">
+          <h2 id="s-h">Sources</h2>
+          <ol class="sources">
+            {ufe.sources.map((s) => (<li><span class="org">{s.org}.</span> {s.url ? <a href={s.url} rel="noopener">{s.title}</a> : s.title}</li>))}
+          </ol>
+        </section>
+      </div>
+    </div>
+  </div>
+</Base>

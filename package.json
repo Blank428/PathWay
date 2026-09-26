@@ -1,0 +1,30 @@
+{
+  "name": "pathway",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "model": "python3 tools/model-pipeline/export_v2.py && gltfpack -i tools/model-pipeline/out/ufe-v2-raw.glb -o public/models/ufe-v2.glb -cc -kn -km"
+  },
+  "dependencies": {
+    "@astrojs/react": "^7.0.0",
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.1",
+    "astro": "^7.3.5",
+    "qrcode": "^1.5.4",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/three": "^0.186.0",
+    "axe-core": "^4.13.0",
+    "gltfpack": "^1.3.0",
+    "typescript": "^7.0.2"
+  }
+}

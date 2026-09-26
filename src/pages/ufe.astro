@@ -1,0 +1,26 @@
+---
+import fs from 'node:fs';
+import Base from '../layouts/Base.astro';
+import GuidePlayer from '../components/guide/GuidePlayer.tsx';
+import '../components/guide/guide.css';
+import ufe from '../content/procedures/ufe.json';
+import model from '../content/procedures/ufe-model.json';
+import { rootFor, PAGES } from '../lib/paths';
+
+const root = rootFor(Astro.url.pathname);
+let stills: string[] = [];
+try { stills = fs.readdirSync('public/stills/ufe').filter((f) => f.endsWith('.webp')).map((f) => f.replace('.webp', '')); } catch {}
+---
+<Base title={ufe.title} current="guides" description={ufe.lede} bare>
+  <GuidePlayer
+    client:load
+    title={ufe.title}
+    chapters={ufe.chapters as any}
+    catheterPath={model.catheterPath as any}
+    root={root}
+    visitHref={root + PAGES.visit}
+    textHref={root + 'ufe/as-text.html'}
+    stills={stills}
+    partAnchors={Object.fromEntries(Object.entries(model.parts).map(([k, v]: any) => [k, v.anchor]))}
+  />
+</Base>

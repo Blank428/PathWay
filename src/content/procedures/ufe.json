@@ -1,0 +1,463 @@
+{
+  "id": "ufe",
+  "status": "live",
+  "title": "Uterine fibroid embolization",
+  "short": "UFE",
+  "region": "Pelvis",
+  "summary": "Shrinks fibroids by blocking the blood vessels that feed them. No surgery.",
+  "lede": "A way to shrink fibroids by cutting off their blood supply, through a tiny opening at the groin or wrist. No surgery and no general anaesthetic.",
+  "readTime": "8 minute read",
+  "facts": [
+    [
+      "Awake",
+      "with medicine to relax you"
+    ],
+    [
+      "A small nick",
+      "at the groin or wrist, no stitches"
+    ],
+    [
+      "Home same day",
+      "for most people"
+    ],
+    [
+      "About a week",
+      "to feel back to normal"
+    ]
+  ],
+  "chapters": [
+    {
+      "id": "where-fibroids-grow",
+      "title": "Fibroids are growths in the wall of the uterus",
+      "body": [
+        "Fibroids are made of muscle and fibrous tissue. They are not cancer, and they are very common: by age 50, most people with a uterus have had at least one.",
+        "Many cause no problems. Depending on where they grow, others can cause heavy periods, cramping, or pressure on the bladder and bowel. The model shows the four places they grow."
+      ],
+      "keys": [
+        {
+          "parts": [
+            "fibroid_submucosal",
+            "after_submucosal"
+          ],
+          "name": "Into the cavity",
+          "note": "most linked to heavy bleeding",
+          "id": "submucosal"
+        },
+        {
+          "parts": [
+            "fibroid_intramural",
+            "after_intramural"
+          ],
+          "name": "Inside the wall",
+          "note": "the most common kind",
+          "id": "intramural"
+        },
+        {
+          "parts": [
+            "fibroid_subserosal",
+            "after_subserosal"
+          ],
+          "name": "On the outside",
+          "note": "can press on the bladder or bowel",
+          "id": "subserosal"
+        },
+        {
+          "parts": [
+            "fibroid_pedunculated",
+            "after_pedunculated"
+          ],
+          "name": "On a stalk",
+          "note": "attached by a narrow stem",
+          "id": "pedunculated"
+        }
+      ],
+      "view": {
+        "camera": null,
+        "visible": null,
+        "highlight": null,
+        "explode": false
+      }
+    },
+    {
+      "id": "take-it-apart",
+      "title": "Every part of the model comes apart",
+      "body": [
+        "The model is built in separate pieces, like the printed one your doctor may hand you. Slide it apart and back together, tap any part on the model, or tap a name below to light it up.",
+        "It is cut open down the middle so you can see inside the uterus. The blood vessels are drawn larger than life so they are easy to follow."
+      ],
+      "keys": [
+        {
+          "id": "l-uterus",
+          "name": "Uterus",
+          "note": "cut open down the middle so you can see inside",
+          "parts": [
+            "uterus"
+          ]
+        },
+        {
+          "id": "l-fibroids",
+          "name": "Fibroids",
+          "note": "in the four places they grow",
+          "parts": [
+            "fibroid_submucosal",
+            "fibroid_intramural",
+            "fibroid_subserosal",
+            "fibroid_pedunculated"
+          ]
+        },
+        {
+          "id": "l-uterine",
+          "name": "Uterine arteries",
+          "note": "feed the uterus and the fibroids",
+          "parts": [
+            "uterine_arteries",
+            "uterine_artery_post_left",
+            "uterine_artery_post_right"
+          ]
+        },
+        {
+          "id": "l-tree",
+          "name": "Pelvic arteries",
+          "note": "the route the catheter takes",
+          "parts": [
+            "artery_tree",
+            "access_port"
+          ]
+        },
+        {
+          "id": "l-ovary",
+          "name": "Ovaries",
+          "note": "one on each side",
+          "parts": [
+            "ovary_left",
+            "ovary_right"
+          ]
+        },
+        {
+          "id": "l-tube",
+          "name": "Fallopian tubes",
+          "note": "connect the ovaries to the uterus",
+          "parts": [
+            "tube_left",
+            "tube_right"
+          ]
+        }
+      ],
+      "view": {
+        "camera": null,
+        "visible": null,
+        "highlight": null,
+        "explode": true
+      }
+    },
+    {
+      "id": "blood-supply",
+      "title": "Fibroids need a steady blood supply",
+      "body": [
+        "Each fibroid is fed by small arteries branching into the uterus. Fibroids depend on this supply much more than the healthy muscle around them does.",
+        "UFE blocks those small arteries. Without blood, the fibroids soften and shrink over the following months, while the uterus itself recovers and stays in place."
+      ],
+      "view": {
+        "camera": null,
+        "visible": null,
+        "highlight": null,
+        "explode": false
+      }
+    },
+    {
+      "id": "getting-in",
+      "title": "A small opening at the groin or wrist",
+      "body": [
+        "You stay awake, with medicine to keep you relaxed and comfortable. The skin is numbed, and the doctor places a thin tube into the artery there. There is no surgical cut."
+      ],
+      "view": {
+        "camera": null,
+        "visible": null,
+        "highlight": null,
+        "explode": false
+      }
+    },
+    {
+      "id": "the-catheter",
+      "title": "A catheter travels to the uterus",
+      "body": [
+        "A catheter about as thin as a strand of spaghetti is guided through the arteries to the ones feeding the uterus. The doctor watches it on an X-ray screen the whole way. Most people do not feel it moving inside the blood vessels."
+      ],
+      "view": {
+        "camera": null,
+        "visible": null,
+        "highlight": null,
+        "explode": false
+      }
+    },
+    {
+      "id": "blocking-the-supply",
+      "title": "Tiny particles block the fibroids' supply",
+      "body": [
+        "Particles about the size of grains of sand are released through the catheter. They lodge in the small vessels feeding the fibroids. Both sides of the uterus are usually treated, through the same opening."
+      ],
+      "view": {
+        "camera": null,
+        "visible": null,
+        "highlight": null,
+        "explode": false
+      }
+    },
+    {
+      "id": "finishing",
+      "title": "The catheter comes out",
+      "body": [
+        "Pressure is held on the opening until it seals, and no stitches are needed. Time in the procedure room is often around 30 minutes, though the whole hospital visit takes most of the day."
+      ],
+      "view": {
+        "camera": null,
+        "visible": null,
+        "highlight": null,
+        "explode": false
+      }
+    },
+    {
+      "id": "six-months-later",
+      "title": "Six months later, the fibroids are smaller",
+      "body": [
+        "Without their blood supply, fibroids shrink over the months that follow, often shrinking to around half their volume. Heavy bleeding often improves from the first period after treatment.",
+        "The uterus stays in place. The model shows the idea. How much your own fibroids shrink depends on their size, type and position."
+      ],
+      "view": {
+        "camera": null,
+        "visible": null,
+        "highlight": null,
+        "explode": false
+      }
+    },
+    {
+      "id": "where-risks-come-from",
+      "title": "The orange markers show what can go wrong",
+      "body": [
+        "The lettered markers match the orange discs on the printed model your doctor may show you. Tap a letter, here or on the model, to read about it."
+      ],
+      "risks": [
+        {
+          "id": "pes",
+          "title": "Pain, fever and nausea afterwards",
+          "body": "Common and expected. As the fibroids break down, most people have cramping, a low fever and tiredness for a few days. It is treated with medicine you take home."
+        },
+        {
+          "id": "expulsion",
+          "title": "A fibroid passing out",
+          "body": "Occasionally a fibroid that bulges into the cavity loosens and passes through the vagina in the weeks afterwards. This can cause cramping or discharge."
+        },
+        {
+          "id": "ovarian",
+          "title": "Periods stopping early",
+          "body": "Uncommon. If particles reach the ovaries' blood supply, periods can stop early. This happens mainly in people over 40."
+        },
+        {
+          "id": "access",
+          "title": "Bruising at the entry point",
+          "body": "A bruise or small swelling where the catheter went in is the most common minor problem. Serious bleeding is rare."
+        },
+        {
+          "id": "vessel",
+          "title": "Injury to an artery",
+          "body": "Uncommon. The team watches the whole route on the X-ray screen to avoid this."
+        }
+      ],
+      "view": {
+        "camera": null,
+        "visible": null,
+        "highlight": null,
+        "explode": false
+      }
+    }
+  ],
+  "yourVisit": {
+    "recovery": [
+      [
+        "The same day",
+        "Rest in recovery for several hours while the team manages cramping and nausea. Most people go home that evening, with a ride."
+      ],
+      [
+        "Days 1 to 3",
+        "Cramping, low fever and tiredness are expected and usually peak here. Take the medicine you were sent home with."
+      ],
+      [
+        "The first week",
+        "Most people are back to normal activity in about a week. Ask when you can drive, work and exercise."
+      ],
+      [
+        "The first period",
+        "Heavy bleeding often improves from the first cycle after treatment and keeps improving."
+      ],
+      [
+        "3 to 6 months",
+        "Fibroids keep shrinking. Your team usually checks in with a follow-up visit or scan."
+      ]
+    ],
+    "callIf": "Call your care team if you have a fever that does not settle, pain that gets worse instead of better, foul-smelling discharge, or bleeding or swelling at the groin or wrist.",
+    "benefits": [
+      "Your uterus stays in place. No hysterectomy.",
+      "No surgical cut, no stitches, and very little blood loss.",
+      "No general anaesthetic.",
+      "Recovery of about a week, compared with several weeks after a hysterectomy.",
+      "About 9 in 10 people find their symptoms improve a great deal or go away."
+    ],
+    "risks": [
+      "Cramping, fever and nausea for a few days: common and expected.",
+      "Bruising or bleeding at the entry point.",
+      "A fibroid passing out through the vagina: occasional.",
+      "Periods stopping early: uncommon, mainly over 40.",
+      "Infection: rare, but can be serious.",
+      "Serious complications overall: fewer than 4 in 100 people."
+    ],
+    "fertility": "Effects on pregnancy are not fully settled. UFE is not usually the first choice for someone trying to become pregnant, and Canadian guidance treats it as a case-by-case conversation. Raise your plans early so they are part of the decision.",
+    "alternatives": [
+      [
+        "Watch and wait",
+        "Many fibroids stay the same size or shrink after menopause. If symptoms are manageable, doing nothing for now is a real option."
+      ],
+      [
+        "Medication",
+        "Can reduce bleeding and pain, or shrink fibroids for a time, but symptoms often return when it stops."
+      ],
+      [
+        "Myomectomy",
+        "Surgery that removes the fibroids and keeps the uterus."
+      ],
+      [
+        "Hysterectomy",
+        "Surgery that removes the uterus. It ends fibroid symptoms for good, with a longer recovery."
+      ]
+    ],
+    "check": [
+      {
+        "q": "How does UFE shrink fibroids?",
+        "opts": [
+          "By cutting them out",
+          "By blocking the blood vessels that feed them",
+          "By removing the uterus"
+        ],
+        "a": 1,
+        "why": "Tiny particles block the fibroids' blood supply, so they soften and shrink. Nothing is cut out."
+      },
+      {
+        "q": "Where does the catheter usually go in?",
+        "opts": [
+          "Through the belly button",
+          "At the groin, or sometimes the wrist",
+          "Through the vagina"
+        ],
+        "a": 1,
+        "why": "A small nick at the groin or wrist. The skin is numbed, and no stitches are needed."
+      },
+      {
+        "q": "What do most people feel in the first few days?",
+        "opts": [
+          "Nothing at all",
+          "Cramping, and sometimes a low fever and nausea",
+          "Severe pain for several weeks"
+        ],
+        "a": 1,
+        "why": "This is called post-embolization syndrome. It is common, expected, and treated with medicine you take home."
+      },
+      {
+        "q": "Is UFE right for everyone with fibroids?",
+        "opts": [
+          "Yes",
+          "No. It depends on your fibroids, symptoms and plans, including pregnancy"
+        ],
+        "a": 1,
+        "why": "There are other good options, including waiting, medication and surgery."
+      }
+    ],
+    "questions": [
+      "Based on my scans, am I a good candidate for UFE?",
+      "How many fibroids do I have, and where are they?",
+      "How could UFE affect my plans for pregnancy?",
+      "What are the chances my symptoms come back?",
+      "How much pain should I expect in the first week, and what will I have for it?",
+      "When can I go back to work, driving and exercise?",
+      "Which symptoms afterwards mean I should call you?",
+      "What would you suggest if you were in my position?"
+    ],
+    "glossary": [
+      [
+        "Fibroid",
+        "A growth in the wall of the uterus that is not cancer. Also called a leiomyoma."
+      ],
+      [
+        "Embolization",
+        "Deliberately blocking a blood vessel, here with tiny particles."
+      ],
+      [
+        "Catheter",
+        "A thin, flexible tube guided through the blood vessels."
+      ],
+      [
+        "Uterine artery",
+        "One of the two arteries, one on each side, that carry blood to the uterus."
+      ],
+      [
+        "Post-embolization syndrome",
+        "Cramping, low fever and tiredness in the days after treatment. Common and expected."
+      ],
+      [
+        "Interventional radiologist",
+        "A doctor who treats conditions through tiny openings, guided by imaging."
+      ]
+    ]
+  },
+  "sources": [
+    {
+      "org": "Society of Interventional Radiology",
+      "title": "Uterine fibroids and UFE, patient information (2024)",
+      "url": "https://www.sirweb.org/for-patients/conditions-and-treatments/uterine-fibroids/"
+    },
+    {
+      "org": "RadiologyInfo.org (RSNA and ACR)",
+      "title": "Uterine fibroid treatment",
+      "url": "https://www.radiologyinfo.org/en/info/uterine-fibroid-treatment"
+    },
+    {
+      "org": "British Society of Interventional Radiology",
+      "title": "Uterine artery embolisation, patient leaflet",
+      "url": "https://www.bsir.org/patients-1/patient-information-leaflets/adult-procedures/uterine-artery-embolisation/"
+    },
+    {
+      "org": "Seminars in Interventional Radiology",
+      "title": "Complications of uterine fibroid embolization",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3036365/"
+    },
+    {
+      "org": "StatPearls, National Library of Medicine",
+      "title": "Uterine fibroid embolization",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK519016/"
+    },
+    {
+      "org": "Society of Obstetricians and Gynaecologists of Canada",
+      "title": "Guideline No. 461: The management of uterine fibroids (2025)",
+      "url": null
+    }
+  ],
+  "video": {
+    "file": null,
+    "embedUrl": null,
+    "title": "Dr. Kotha explains UFE",
+    "note": "A short video of your doctor explaining the procedure in their own words is being recorded. Until it is here, this page covers the same ground.",
+    "show": false
+  },
+  "review": {
+    "by": "Dr. Kotha",
+    "date": null,
+    "status": "draft, not yet clinically reviewed"
+  },
+  "claimsNeedingSource": [
+    "By age 50, most people with a uterus have had at least one fibroid",
+    "About 9 in 10 people find their symptoms improve a great deal or go away",
+    "Serious complications overall: fewer than 4 in 100",
+    "Fibroids often shrink to around half their volume",
+    "Periods stopping early: uncommon, mainly over 40",
+    "Most people are back to normal activity in about a week",
+    "Time in the procedure room often around 30 minutes"
+  ]
+}

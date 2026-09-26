@@ -1,0 +1,66 @@
+---
+import Base from '../layouts/Base.astro';
+import '../styles/pages.css';
+import data from '../content/projects.json';
+import { rootFor, PAGES } from '../lib/paths';
+const root = rootFor(Astro.url.pathname);
+const p = data.projects[0];
+---
+<Base title="Library" current="library" description="Every Pathway model: parts, print details, photos and patient guides.">
+  <header class="page-head grid-bg">
+    <div class="wrap">
+      <span class="eyebrow"><span class="dot"></span>For clinicians and the hospital</span>
+      <h1>Model library</h1>
+      <p class="lede">Every model we have designed or planned. Each project holds the printed model, its parts and print details, photos of the real print, and the guide patients use at home.</p>
+    </div>
+  </header>
+  <div class="wrap">
+    <article class="proj-card">
+      <figure class="studio"><img src={root + 'stills/home/exploded.webp'} alt={`The ${p.short} model taken apart into its printed parts.`} /></figure>
+      <div class="pc-body">
+        <div class="pc-top">
+          <span class="status is-live">{p.code} · {p.status}, rev {p.revision}</span>
+          <h2>{p.title}</h2>
+          <p>{p.summary}</p>
+        </div>
+        <div class="actions">
+          <a class="btn btn-primary" href={root + PAGES.ufeProject}>Open project</a>
+          <a class="btn btn-quiet" href={root + PAGES.ufe}>Patient guide</a>
+        </div>
+        <dl class="tblock">
+          <div><dt>Parts</dt><dd>{p.specs.parts}</dd></div>
+          <div><dt>Plates</dt><dd>{p.specs.plates}</dd></div>
+          <div><dt>Print time</dt><dd>{p.specs.printTime}</dd></div>
+          <div><dt>Filament</dt><dd>{p.specs.filament}</dd></div>
+          <div><dt>Footprint</dt><dd>{p.specs.footprint}</dd></div>
+          <div><dt>Clinical lead</dt><dd>{p.clinician}</dd></div>
+        </dl>
+      </div>
+    </article>
+
+    <section class="sec" aria-labelledby="planned-h">
+      <div class="sec-head"><h2 id="planned-h">Planned</h2><p>Procedures next in line for a model and a guide.</p></div>
+      <ul class="catalogue">
+        {data.planned.map((q) => (
+          <li><div class="cat-row is-planned"><span class="cat-code">{q.code}</span><span class="cat-title">{q.title}</span><span class="mono">{q.region}</span><span></span><span class="status is-planned">Planned</span></div></li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="sec" aria-labelledby="use-h">
+      <div class="split">
+        <div class="cta-block dark">
+          <span class="label">In clinic</span>
+          <h3 id="use-h">Using the models in a short consult</h3>
+          <p>A five-step walkthrough, links straight to each guide chapter, and the full print breakdown.</p>
+          <a class="btn btn-primary" href={root + PAGES.clinicians} style="justify-self:start">Read the clinic guide</a>
+        </div>
+        <div class="cta-block">
+          <span class="label">New procedure</span>
+          <h3>Want a model for your procedure?</h3>
+          <p>Models start from what you need to show a patient in a few minutes. Talk to Jodh Gill, project lead, to start one.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</Base>

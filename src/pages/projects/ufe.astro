@@ -1,0 +1,82 @@
+---
+import Base from '../../layouts/Base.astro';
+import '../../styles/pages.css';
+import data from '../../content/projects.json';
+import ufe from '../../content/procedures/ufe.json';
+import { rootFor, PAGES } from '../../lib/paths';
+const root = rootFor(Astro.url.pathname);
+const p = data.projects[0];
+const fil = Object.fromEntries(p.filaments);
+---
+<Base title={`${p.code} ${p.title}`} current="library" description={p.summary}>
+  <header class="page-head grid-bg">
+    <div class="wrap">
+      <span class="crumb"><a href={root + PAGES.library}>Library</a> / {p.code}</span>
+      <h1>{p.title}</h1>
+      <p class="lede">{p.summary}</p>
+      <p class="status is-live">{p.status} · revision {p.revision} · clinical lead {p.clinician}</p>
+    </div>
+  </header>
+  <div class="wrap">
+    <div class="proj-hero" style="margin-top:8px">
+      <figure class="studio"><img src={root + 'stills/home/hero.webp'} alt="The assembled model on its display base." /><figcaption class="mono">Assembled on its base</figcaption></figure>
+      <figure class="studio"><img src={root + 'stills/home/exploded.webp'} alt="The model taken apart into its parts." /><figcaption class="mono">Taken apart</figcaption></figure>
+    </div>
+    <dl class="tblock proj-tblock">
+      <div><dt>Project</dt><dd>{p.code}</dd></div>
+      <div><dt>Parts</dt><dd>{p.specs.parts}, pegged, no glue</dd></div>
+      <div><dt>Plates</dt><dd>{p.specs.plates}</dd></div>
+      <div><dt>Print time</dt><dd>{p.specs.printTime}</dd></div>
+      <div><dt>Filament</dt><dd>{p.specs.filament}</dd></div>
+      <div><dt>Layer height</dt><dd>{p.specs.layer}</dd></div>
+      <div><dt>Printer</dt><dd>{p.specs.printer}</dd></div>
+      <div><dt>Footprint</dt><dd>{p.specs.footprint}</dd></div>
+    </dl>
+
+    <section class="sec" aria-labelledby="guide-h">
+      <div class="split">
+        <div class="cta-block dark">
+          <span class="label">Interactive guide</span>
+          <h3 id="guide-h">Walk through it on the 3D model</h3>
+          <p>{ufe.chapters.length} chapters on this exact model: where fibroids grow, the catheter route, blocking the supply, six months later and where the risks come from.</p>
+          <a class="btn btn-primary" href={root + PAGES.ufe} style="justify-self:start">Open the guide</a>
+        </div>
+        <div class="cta-block">
+          <span class="label">For the patient to take home</span>
+          <h3>Recovery, options and questions</h3>
+          <p>The page patients come back to: a recovery timeline, benefits against risks, other options and a checklist of questions for the next visit.</p>
+          <a class="btn btn-quiet" href={root + PAGES.visit} style="justify-self:start">Open Your visit</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="photos-h">
+      <div class="sec-head"><h2 id="photos-h">Photos of the print</h2><p>The real model, as it comes off the printer and in the hand.</p></div>
+      <div class="photos">
+        {p.photos.map((ph) => (
+          <figure class="photo">
+            {ph.file
+              ? <img src={root + ph.file} alt={ph.shot} />
+              : <div class="slot"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 8h3l2-2.5h6L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><strong>Photo {ph.id}</strong><span class="mono">Coming soon</span></div></div>}
+            <figcaption>{ph.shot}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="bom-h">
+      <div class="sec-head"><h2 id="bom-h">Parts</h2><p>{p.parts.length} printed parts. Numbers match the parts on the print plates.</p></div>
+      <div class="bom-wrap">
+        <table class="bom">
+          <thead><tr><th scope="col">No.</th><th scope="col">Part</th><th scope="col">Filament</th><th scope="col">Note</th></tr></thead>
+          <tbody>
+            {p.parts.map((pt, n) => (
+              <tr><td><span class="balloon">{String(n + 1).padStart(2, '0')}</span></td><td class="part">{pt.name}</td><td class="fil"><span class="swatch" style={`background:${fil[pt.filament]}`}></span>{pt.filament}</td><td class="note">{pt.note}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="bom-foot mono">{p.extra}</p>
+    </section>
+  </div>
+</Base>

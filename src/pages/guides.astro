@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import '../styles/pages.css';
+import data from '../content/projects.json';
+import ufe from '../content/procedures/ufe.json';
+import { rootFor, PAGES } from '../lib/paths';
+const root = rootFor(Astro.url.pathname);
+const planned = data.planned.map((q) => (/^[A-Z]{2}/.test(q.title) ? q.title : q.title[0].toLowerCase() + q.title.slice(1)));
+const list = planned.slice(0, -1).join(', ') + ' and ' + planned.at(-1);
+---
+<Base title="Guides" current="guides" description="Patient guides to interventional radiology procedures, on the same 3D model your doctor uses in clinic.">
+  <header class="page-head grid-bg">
+    <div class="wrap">
+      <span class="eyebrow"><span class="dot"></span>For patients and families</span>
+      <h1>Guides</h1>
+      <p class="lede">Pick the procedure you've been offered. Each guide walks through it on the same model your doctor may show you in clinic, then covers recovery, risks and the questions to bring.</p>
+    </div>
+  </header>
+  <div class="wrap">
+    <article class="guide-card">
+      <div class="gc-copy">
+        <span class="status is-live">Guide ready · {ufe.region}</span>
+        <h2>{ufe.title}</h2>
+        <p>{ufe.lede}</p>
+        <dl class="facts">{ufe.facts.map(([t, d]) => (<div><dt>{t}</dt><dd>{d}</dd></div>))}</dl>
+        <div class="actions" style="margin-top:16px">
+          <a class="btn btn-primary" href={root + PAGES.ufe}>Start the guide</a>
+          <a class="btn btn-quiet" href={root + PAGES.visit}>Recovery and questions</a>
+        </div>
+        <p class="mono" style="color:var(--ink-3)">{ufe.chapters.length} chapters · about {ufe.readTime.replace(' minute read', ' minutes')} · <a href={root + PAGES.text}>read as text</a></p>
+      </div>
+      <figure><img src={root + 'stills/ufe/where-fibroids-grow.webp'} alt="" /></figure>
+    </article>
+    <p class="planned-list"><strong>Coming later:</strong> guides for {list}. Each one gets its printed model first.</p>
+  </div>
+</Base>

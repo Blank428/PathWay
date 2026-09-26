@@ -1,0 +1,162 @@
+# Pathway: context for Claude Code
+
+Read this first. It sums up a long design session so you don't repeat work that was already rejected.
+
+## What this is
+
+Pathway is a hub for 3D printed teaching models of Interventional Radiology (IR) procedures at Victoria General Hospital (Island Health), plus the patient guides that go with them. The idea is that a doctor hands a patient the printed model in clinic, and the patient goes over the same model at home on this site.
+
+- **Koah Barstead** owns the front end and the printing. You're working with him. Treat him as the design lead.
+- **Jodh Gill** is project lead and owns the hospital relationship. He built the first site and signs off on the design.
+- **Dr. Kotha** is Medical Lead, IR, and the clinical sponsor. Always write "Dr. Kotha". No other form of the name.
+- **Lia McCulloch** is credited on the team list. Leave her credit as is.
+
+The long-term goal is one place for every procedure's model, prints and guide, added one at a time. UFE (uterine fibroid embolization) is the only real one so far (project P-001). This is also going in Koah's web design portfolio, so the bar is professional work, not "good enough".
+
+## Working with Koah
+
+- Scope before coding. For any real change of direction, ask the questions that matter first, then build.
+- Be blunt. If something he asks for is a bad idea, say so and why, then let him decide.
+- Show, don't describe. Run the dev server and have him look at the live page in his browser.
+- Site copy: plain language, short sentences, Canadian spelling, no em dashes anywhere.
+
+## Hard rules
+
+- **Jodh's original site** (pathway-ir.netlify.app) stays up and untouched. Deploy this rebuild somewhere separate.
+- **Nothing goes public** with the hospital's name or Dr. Kotha's name until the hospital approves. Keep `noindex` on. Share preview links privately.
+- **Printed colours only.** The site shows one model, in the actual filament colours. There used to be a "realistic anatomy" colour mode. It was removed because two looks read as two different models.
+- **Colour meanings are fixed:**
+
+  | Colour | Means |
+  | --- | --- |
+  | White | Uterus |
+  | Red | Arteries |
+  | Purple | Fibroids |
+  | Pink | Ovaries and tubes |
+  | Orange | Risk (and nothing else) |
+  | Blue | Display base; also the interface accent |
+
+- **Accessibility bar:** WCAG 2.2 AA with 0 axe-core violations in light and dark. Patient copy at about a grade 6 reading level (the AMA and NIH recommendation). Respect reduced motion.
+- **Speed budget:** web model under 3 MB compressed. Text readable before the 3D loads.
+- **Clinical content** is a draft until Dr. Kotha reviews it. `ufe.json` has `review` and `claimsNeedingSource`. Don't invent medical facts or statistics.
+
+## Stack and commands
+
+- Astro 7 (static output, `build.format: 'file'`).
+- React 19 island for the guide.
+- three.js via React Three Fiber and drei.
+- Plain CSS with tokens. No UI kit.
+- Every link is relative (`src/lib/paths.ts`), so the build runs from any folder or host.
+
+```
+npm install
+npm run dev        # http://localhost:4321
+npm run build      # dist/
+npm run model      # rebuild the web model from the print assembly (needs Python: numpy, trimesh, fast_simplification)
+```
+
+`tools/preview/make_preview.py` only packages `dist/` as a claude.ai artifact preview. You don't need it locally.
+
+## Where things live
+
+| Path | What |
+| --- | --- |
+| `src/content/site.json` | Site name, hospital, team, upcoming procedures |
+| `src/content/projects.json` | Library: P-001 specs, 23-part list, photo slots and shot list, planned P-002 to P-009 |
+| `src/content/procedures/ufe.json` | All patient copy: 9 chapters, keys, risks, Your visit sections, quiz, questions, glossary, sources, review status |
+| `src/content/procedures/ufe-views.ts` | What the 3D model does per chapter: camera, visible parts, see-through parts, highlight, explode, catheter progress, particles, six-month swap, risk markers A to E. `STILL_VIEWS` holds render-only views. |
+| `src/content/procedures/ufe-model.json` | Generated: part centres and label anchors, catheter route |
+| `src/components/guide/GuidePlayer.tsx` | The chapter player. Back and Next are the only way to move through it, plus Play and the chapter menu. Scrolling never drives the model. Chapter is in the URL hash (`ufe.html#take-it-apart`). |
+| `src/components/guide/Stage.tsx` | R3F scene: materials, explode, fades, catheter tube, particles, camera tween, label projection |
+| `src/styles/global.css`, `pages.css`, `components/guide/guide.css` | Design tokens and styles, light and dark |
+| `src/pages/` | `index`, `guides`, `library`, `projects/ufe`, `ufe` (guide), `ufe/your-visit`, `ufe/as-text`, `clinicians`, `about` |
+| `public/models/ufe-v2.glb` | Web model: 23 named parts, about 457k triangles, about 1.9 MB with meshopt compression |
+| `public/stills/` | Poster and hero renders (see Renders below) |
+| `tools/model-pipeline/` | `export_v2.py` plus `source/ufe_v2_assembly.npz`, the same assembly the print plates come from |
+
+## The model
+
+The v2 print is 23 parts that peg together with no glue:
+
+- Uterus body, cut open
+- Artery tree with an open catheter groove
+- Uterine artery arc plus two posts
+- Ovarian arteries
+- Groin access port
+- 2 tubes and 2 ovaries
+- 4 fibroids, plus a 79% "six months later" set of 4
+- Risk discs A, B and C
+- Display base
+
+The web model is exported from the same files, so screen and print match part for part.
+
+Details:
+
+- **Frame:** 1 unit = 60 mm, y up toward the fundus, z toward the viewer.
+- **Risk markers:** A, B and C are the printed discs (pain and fever, fibroid passing, periods stopping early). D (groin entry) and E (artery injury) are on screen only, drawn with a dashed outline, until those discs are printed.
+- **Print facts shown on the site:** 8 plates, 14 h 6 min, about 300 g PLA, 0.16 mm layers, Bambu Lab A1, 196 x 246 mm footprint.
+
+## Design history (don't repeat these)
+
+1. **Jodh's original:** read as AI-generated.
+   - Tiny caps labels over every heading.
+   - A serif headline with an italic accent word.
+   - Numbered 01/02/03 cards and initials avatars.
+   - A grid of "Coming soon" cards.
+   - Four competing ways to move through the guide, and a viewer that covered text and fell out of sync.
+2. **v1 rebuild** (one UFE guide with a few pages around it):
+   - Rejected as the wrong thing. Koah wants a **hub** for all procedures over time, not one guide.
+   - It showed two colour looks, which read as two models.
+   - Too basic.
+3. **v2 "maker lab"** (drawing-sheet title blocks, heavy black borders, stretched all-caps headlines, drafting grid): rejected as **blocky and chunky**.
+4. **Current:** smooth and soft.
+   - Hairline dividers, white cards with soft shadows.
+   - Sentence-case Archivo at normal width, Atkinson Hyperlegible Next for body text.
+   - Pill-shaped controls.
+   - Cross-page view transitions.
+   - Koah's verdict: better, but **"still a long ways off"**.
+
+**What's still missing, in Koah's words:** smooth, clean, professional, and "everything should flow exactly how your brain thinks it should."
+
+Before another visual pass, get concrete references from him: 3 to 5 sites he loves and what he likes about each. Don't guess taste again.
+
+## Structure Koah chose
+
+- **Two front doors** on the home page:
+  - Patients go to Guides.
+  - Clinicians and the hospital go to the Library.
+- **Each procedure page holds** the interactive guide and photos of the real print. He did not pick print downloads or a status timeline for now.
+- **Photos:** Koah will shoot them. The P-001 page has 6 slots, and the shot list is in `projects.json`. Real photos are the biggest single upgrade available, because the renders still look like CAD.
+
+## Renders
+
+Posters and hero images come from the live viewer:
+
+- `ufe.html?still#chapter` hides the overlays.
+- `?view=hero` or `?view=exploded` uses `STILL_VIEWS`.
+
+Screenshot the `.guide-stage` element, crop it, and save it as WebP to `public/stills/`. Re-render after any model or lighting change.
+
+## Checks before calling anything done
+
+- Screenshots at 390, 768 and 1440 px, in light and dark.
+- axe-core on every page: 0 violations.
+- Click through:
+  - Chapter menu, Next and Back
+  - A risk marker
+  - The quiz
+  - The questions checklist and its Copy button
+- No horizontal scroll at 390 px. An earlier build had a 400 px header overflow on phones.
+
+## Open items
+
+- [ ] Design direction from Koah's references, then Jodh's sign-off.
+- [ ] Real photos into the 6 slots.
+- [ ] Print discs D and E so print and screen match 5 for 5 (recommended).
+- [ ] Each statistic tied to one of the 6 listed sources, then Dr. Kotha's review with a date shown.
+- [ ] Credits: Jodh's line still says he built the site. His call.
+- [ ] Analytics: none so far. Decide with Jodh before adding any.
+- [ ] Trim the 3D bundle (about 1 MB before gzip), mostly drei.
+- [ ] Soften the printed joints and fix the shading streaks on the uterus cut face.
+- [ ] QR codes per chapter once there's a final address.
+- [ ] The "Dr. Kotha explains UFE" video slot is hidden until a recording exists.

@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import '../styles/pages.css';
+import site from '../content/site.json';
+---
+<Base title="About" current="about">
+  <header class="page-head grid-bg">
+    <div class="wrap">
+      <h1>About {site.name}</h1>
+      <p class="lede">Interventional radiologists often have a few minutes to explain a procedure that people then have to decide on. {site.name} gives patients a model to hold in clinic and the same model to explore at home.</p>
+    </div>
+  </header>
+  <div class="wrap">
+    <div class="doc-grid">
+      <nav class="toc" aria-label="On this page">
+        <a href="#team">Who made it</a>
+        <a href="#models">How the models are made</a>
+        <a href="#privacy">Privacy</a>
+      </nav>
+      <div class="doc-body">
+        <section id="team" aria-labelledby="t-h">
+          <h2 id="t-h">Who made it</h2>
+          <ul class="team">{site.team.map((m) => (<li><strong>{m.name}</strong><span>{m.role}</span></li>))}</ul>
+        </section>
+        <section id="models" aria-labelledby="mo-h">
+          <h2 id="mo-h">How the models are made</h2>
+          <ol class="steps">
+            <li><div><h3>Designed with the physician</h3><p>Each model starts from what the doctor needs to show: where the problem is, the route in, and where risks come from.</p></div></li>
+            <li><div><h3>Built to be handled</h3><p>Parts are sized so nothing thin snaps off, and they peg together without glue so the model can be taken apart again and again.</p></div></li>
+            <li><div><h3>Printed and matched on screen</h3><p>The web model is exported from the same files as the print, so the two always match part for part.</p></div></li>
+          </ol>
+        </section>
+        <section id="privacy" aria-labelledby="p-h">
+          <h2 id="p-h">Privacy</h2>
+          <p class="intro">There are no accounts, cookies or tracking on this site. Questions you tick are saved only in your own browser, and quiz answers are not saved at all.</p>
+        </section>
+      </div>
+    </div>
+  </div>
+</Base>

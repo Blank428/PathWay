@@ -1,0 +1,267 @@
+{
+  "projects": [
+    {
+      "id": "ufe",
+      "code": "P-001",
+      "title": "Uterine fibroid embolization",
+      "short": "UFE",
+      "region": "Pelvis",
+      "status": "Prototype",
+      "revision": 2,
+      "summary": "A cut-open uterus with fibroids in the four places they grow, the arteries a catheter takes from the groin, and lettered discs where the risks come from. Every part pegs together and comes apart.",
+      "specs": {
+        "parts": 23,
+        "printTime": "14 h 6 min",
+        "filament": "About 300 g PLA",
+        "plates": 8,
+        "layer": "0.16 mm",
+        "printer": "Bambu Lab A1",
+        "footprint": "196 x 246 mm"
+      },
+      "filaments": [
+        [
+          "White",
+          "#eeeae1"
+        ],
+        [
+          "Red",
+          "#c0252d"
+        ],
+        [
+          "Purple",
+          "#7a4bb5"
+        ],
+        [
+          "Pink",
+          "#e89bb9"
+        ],
+        [
+          "Orange",
+          "#ee8a2a"
+        ],
+        [
+          "Blue",
+          "#3d6db5"
+        ]
+      ],
+      "clinician": "Dr. Kotha",
+      "guide": "ufe.html",
+      "visit": "ufe/your-visit.html",
+      "parts": [
+        {
+          "id": "uterus",
+          "name": "Uterus body",
+          "filament": "White",
+          "note": "Cut open down the middle"
+        },
+        {
+          "id": "artery_tree",
+          "name": "Artery tree",
+          "filament": "Red",
+          "note": "Aorta to both groins, open catheter groove"
+        },
+        {
+          "id": "uterine_arteries",
+          "name": "Uterine artery arc",
+          "filament": "Red",
+          "note": "Locks the fibroids in"
+        },
+        {
+          "id": "uterine_artery_post_left",
+          "name": "Uterine artery post, left",
+          "filament": "Red",
+          "note": "Pegs into the tree"
+        },
+        {
+          "id": "uterine_artery_post_right",
+          "name": "Uterine artery post, right",
+          "filament": "Red",
+          "note": "Pegs into the tree"
+        },
+        {
+          "id": "ovarian_arteries",
+          "name": "Ovarian arteries",
+          "filament": "Red",
+          "note": "Aorta to both ovaries"
+        },
+        {
+          "id": "access_port",
+          "name": "Groin access port",
+          "filament": "Red",
+          "note": "Where the catheter goes in"
+        },
+        {
+          "id": "tube_left",
+          "name": "Fallopian tube, left",
+          "filament": "Pink",
+          "note": ""
+        },
+        {
+          "id": "tube_right",
+          "name": "Fallopian tube, right",
+          "filament": "Pink",
+          "note": ""
+        },
+        {
+          "id": "ovary_left",
+          "name": "Ovary, left",
+          "filament": "Pink",
+          "note": ""
+        },
+        {
+          "id": "ovary_right",
+          "name": "Ovary, right",
+          "filament": "Pink",
+          "note": "Carries disc C"
+        },
+        {
+          "id": "fibroid_submucosal",
+          "name": "Fibroid, into the cavity",
+          "filament": "Purple",
+          "note": "Today"
+        },
+        {
+          "id": "fibroid_intramural",
+          "name": "Fibroid, inside the wall",
+          "filament": "Purple",
+          "note": "Today"
+        },
+        {
+          "id": "fibroid_subserosal",
+          "name": "Fibroid, on the outside",
+          "filament": "Purple",
+          "note": "Today"
+        },
+        {
+          "id": "fibroid_pedunculated",
+          "name": "Fibroid, on a stalk",
+          "filament": "Purple",
+          "note": "Today"
+        },
+        {
+          "id": "after_submucosal",
+          "name": "Fibroid, into the cavity",
+          "filament": "Purple",
+          "note": "Six months later, 79%"
+        },
+        {
+          "id": "after_intramural",
+          "name": "Fibroid, inside the wall",
+          "filament": "Purple",
+          "note": "Six months later, 79%"
+        },
+        {
+          "id": "after_subserosal",
+          "name": "Fibroid, on the outside",
+          "filament": "Purple",
+          "note": "Six months later, 79%"
+        },
+        {
+          "id": "after_pedunculated",
+          "name": "Fibroid, on a stalk",
+          "filament": "Purple",
+          "note": "Six months later, 79%"
+        },
+        {
+          "id": "disc_a",
+          "name": "Risk disc A",
+          "filament": "Orange",
+          "note": "Pain, fever and nausea"
+        },
+        {
+          "id": "disc_b",
+          "name": "Risk disc B",
+          "filament": "Orange",
+          "note": "A fibroid passing out"
+        },
+        {
+          "id": "disc_c",
+          "name": "Risk disc C",
+          "filament": "Orange",
+          "note": "Periods stopping early"
+        },
+        {
+          "id": "base",
+          "name": "Display base",
+          "filament": "Blue",
+          "note": "196 x 246 mm, lettered"
+        }
+      ],
+      "extra": "Catheter: about 40 cm of clear 1.75 mm filament laid in the artery groove",
+      "photos": [
+        {
+          "id": "01",
+          "shot": "Assembled on its base, three-quarter view from the front left",
+          "file": null
+        },
+        {
+          "id": "02",
+          "shot": "Every part laid out flat on a plain surface, the way it comes off the printer",
+          "file": null
+        },
+        {
+          "id": "03",
+          "shot": "A hand holding the uterus with the fibroids in, cut face toward the camera",
+          "file": null
+        },
+        {
+          "id": "04",
+          "shot": "Close-up of the clear catheter strand running in the red artery groove",
+          "file": null
+        },
+        {
+          "id": "05",
+          "shot": "The two fibroid sets side by side: today and six months later",
+          "file": null
+        },
+        {
+          "id": "06",
+          "shot": "Close-up of the orange risk discs A, B and C in place",
+          "file": null
+        }
+      ]
+    }
+  ],
+  "planned": [
+    {
+      "code": "P-002",
+      "title": "Prostate artery embolization",
+      "region": "Prostate"
+    },
+    {
+      "code": "P-003",
+      "title": "Vertebroplasty and kyphoplasty",
+      "region": "Spine"
+    },
+    {
+      "code": "P-004",
+      "title": "Endovascular aneurysm repair",
+      "region": "Aorta"
+    },
+    {
+      "code": "P-005",
+      "title": "Nephrostomy tube",
+      "region": "Kidney"
+    },
+    {
+      "code": "P-006",
+      "title": "PICC line",
+      "region": "Arm"
+    },
+    {
+      "code": "P-007",
+      "title": "Chemoembolization of the liver",
+      "region": "Liver"
+    },
+    {
+      "code": "P-008",
+      "title": "Biliary drain",
+      "region": "Liver"
+    },
+    {
+      "code": "P-009",
+      "title": "Varicose vein treatment",
+      "region": "Leg"
+    }
+  ]
+}

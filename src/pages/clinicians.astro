@@ -1,0 +1,77 @@
+---
+import Base from '../layouts/Base.astro';
+import '../styles/pages.css';
+import ufe from '../content/procedures/ufe.json';
+import { rootFor, PAGES } from '../lib/paths';
+const root = rootFor(Astro.url.pathname);
+const plates = [
+  ['Fit test', 'Any', 'Socket block and peg tab to check the fit', '26 min'],
+  ['Base', 'Blue', 'Display base with lettering', '2 h 33 min'],
+  ['Uterus', 'White', 'Uterus body, cut open', '3 h 51 min'],
+  ['Artery tree', 'Red', 'Aorta to groin, with the open catheter groove', '3 h 51 min'],
+  ['Arteries and port', 'Red', 'Uterine artery arc and posts, ovarian arteries, groin port', '1 h 17 min'],
+  ['Fibroids', 'Purple', 'Four fibroids plus the six-month set', '1 h 10 min'],
+  ['Ovaries and tubes', 'Pink', 'Two ovaries, two fallopian tubes', '44 min'],
+  ['Risk discs', 'Orange', 'Discs A, B and C', '14 min'],
+];
+---
+<Base title="For clinicians" current="library" description="How to use Pathway and the printed UFE model in a short consult.">
+  <header class="page-head grid-bg">
+    <div class="wrap">
+      <span class="crumb"><a href={root + PAGES.library}>Library</a> / In clinic</span>
+      <h1>Using the models in clinic</h1>
+      <p class="lede">The printed model does the explaining in the room. The guide lets the patient go over it again at home, with the same parts and the same lettered risk discs.</p>
+    </div>
+  </header>
+  <div class="wrap">
+    <div class="doc-grid">
+      <nav class="toc" aria-label="On this page">
+        <a href="#consult">In a short consult</a>
+        <a href="#links">Link to a chapter</a>
+        <a href="#model">The printed model</a>
+        <a href="#review">How content is reviewed</a>
+      </nav>
+      <div class="doc-body">
+        <section id="consult" aria-labelledby="c-h">
+          <h2 id="c-h">In a short consult</h2>
+          <ol class="steps">
+            <li><div><h3>Hand over the model assembled</h3><p>Point out the fibroids by colour. The uterus is cut open down the middle so the cavity and wall are visible.</p></div></li>
+            <li><div><h3>Trace the route</h3><p>Follow the clear catheter strand from the groin port, up the artery groove and over to the uterine artery.</p></div></li>
+            <li><div><h3>Point at the discs</h3><p>Orange discs A, B and C mark where the main risks come from: pain and fever, a fibroid passing, periods stopping early.</p></div></li>
+            <li><div><h3>Show six months later</h3><p>Lift the artery arc, swap in the smaller fibroid set, put the arc back.</p></div></li>
+            <li><div><h3>Send them to the guide</h3><p>The guide repeats all of this at home and ends with a checklist of questions for the next visit.</p></div></li>
+          </ol>
+        </section>
+
+        <section id="links" aria-labelledby="l-h">
+          <h2 id="l-h">Link to a chapter</h2>
+          <p class="intro">Every chapter has its own address, so you can send a patient straight to the part they asked about. QR codes for each chapter get printed once the site has its final address.</p>
+          <ul class="chapter-links">
+            {ufe.chapters.map((c, n) => (
+              <li><span class="mono">{String(n + 1).padStart(2, '0')}</span><a href={`${root}${PAGES.ufe}#${c.id}`}>{c.title}</a><code>ufe#{c.id}</code></li>
+            ))}
+            <li><span class="mono">+</span><a href={root + PAGES.visit}>Your visit: recovery, options and questions</a><code>ufe/your-visit</code></li>
+          </ul>
+        </section>
+
+        <section id="model" aria-labelledby="m-h">
+          <h2 id="m-h">The printed model</h2>
+          <p class="intro">Printed on a Bambu Lab A1 in PLA at 0.16 mm layers. Parts snap together on printed D-shaped pegs, so nothing is glued and every part comes apart for teaching.</p>
+          <div class="table-wrap">
+            <table class="plates">
+              <thead><tr><th scope="col">Plate</th><th scope="col">Filament</th><th scope="col">Parts</th><th scope="col" class="num">Time</th></tr></thead>
+              <tbody>{plates.map(([p, f, parts, t]) => (<tr><td>{p}</td><td>{f}</td><td>{parts}</td><td class="num">{t}</td></tr>))}</tbody>
+              <tfoot><tr><td colspan="3">About 300 g of PLA in total, including about 18 g of supports</td><td class="num">14 h 6 min</td></tr></tfoot>
+            </table>
+          </div>
+        </section>
+
+        <section id="review" aria-labelledby="r-h">
+          <h2 id="r-h">How content is reviewed</h2>
+          <p class="intro">Every clinical statement is checked against the listed sources and signed off by {ufe.review.by} before a guide goes live. The reviewer's name and the review date show at the bottom of every page, and any later clinical change needs a new sign-off.</p>
+          <p class="callout-risk"><strong>Current status:</strong> {ufe.review.status}. Numbers that still need a matching source: {ufe.claimsNeedingSource.length}.</p>
+        </section>
+      </div>
+    </div>
+  </div>
+</Base>
